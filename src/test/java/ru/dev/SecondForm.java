@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static testdata.TestData.*;
 
 
 class SecondForm {
@@ -23,16 +24,16 @@ class SecondForm {
 
     @Test
     void fillForm() {
-        $("#userName").setValue("Lana");
+        $("#userName").setValue(firstName);
         $("#submit").click();
 
-        $("#output").shouldHave(text("Lana"));
+        $("#output").shouldHave(text(firstName));
     }
 
     @Test
     void successfulFillOnlyMandatoryFieldsTest() {
-        $("#userName").setValue("Lana");
-        $("#userEmail").setValue("Lana@.ru");
+        $("#userName").setValue(firstName);
+        $("#userEmail").setValue(wrongEmail);
         $("#submit").click();
 
         $("#userEmail").shouldHave(cssClass("field-error"));
