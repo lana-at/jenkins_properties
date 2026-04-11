@@ -2,6 +2,7 @@ package ru.dev;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,17 +14,16 @@ import static testdata.TestData.*;
 class SecondForm {
 
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.clickViaJs = true;
-        open("/text-box");
-        WebDriverRunner.getWebDriver().manage().window().maximize();
+        Configuration.browserSize = "1920x1080";
     }
 
 
     @Test
     void fillForm() {
+        open("/text-box");
         $("#userName").setValue(firstName);
         $("#submit").click();
 
@@ -32,6 +32,7 @@ class SecondForm {
 
     @Test
     void successfulFillOnlyMandatoryFieldsTest() {
+        open("/text-box");
         $("#userName").setValue(firstName);
         $("#userEmail").setValue(wrongEmail);
         $("#submit").click();

@@ -2,6 +2,8 @@ package ru.dev;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,22 +18,25 @@ import static testdata.TestData.*;
 class PracticeForm {
 
 
-    @BeforeEach
-        // ← сначала метод настройки
-    void setUp() {
+    @BeforeAll
+    static void setUp() {
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.clickViaJs = true;
-        open("/automation-practice-form");
-        WebDriverRunner.getWebDriver().manage().window().maximize();
+        Configuration.browserSize = "1920x1080";
+    }
+
+    @AfterEach
+    void closeDriver() {
+        closeWebDriver();
     }
 
 
     @Test
     void successfulLoginTest() {
+        open("/automation-practice-form");
         $("#firstName").setValue(firstName);
         $("#lastName").setValue(lastName);
         $("#userEmail").setValue(userEmail);
-        $("#genterWrapper").find(byText(genterWrapper)).click();
+        $("#genterWrapper").find(byText(genderWrapper)).click();
         $("#userNumber").setValue(userNumber);
         $("#dateOfBirthInput").click();
         $(".react-datepicker__year-select").selectOption(year);
@@ -55,7 +60,7 @@ class PracticeForm {
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text(firstName + " " + lastName));
         $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text(userEmail));
-        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text(genterWrapper));
+        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text(genderWrapper));
         $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(userNumber));
         $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text(day + " " + month + "," + year));
         $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text(subjects));
@@ -69,25 +74,29 @@ class PracticeForm {
 
     @Test
     void successfulFillOnlyMandatoryFieldsTest() {
+        open("/automation-practice-form");
         $("#firstName").setValue(firstName);
         $("#lastName").setValue(lastName);
-        $("#genterWrapper").find(byText(genterWrapper)).click();
+        $("#genterWrapper").find(byText(genderWrapper)).click();
         $("#userNumber").setValue(userNumber);
+        $("#submit").scrollTo().shouldBe(visible);
         $("#submit").click();
 
         $("#example-modal-sizes-title-lg").shouldBe(visible);
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text(firstName + " " + lastName));
-        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text(genterWrapper));
+        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text(genderWrapper));
         $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text(userNumber));
 
     }
 
     @Test
     void negativeEmptyFirstNameTest() {
+        open("/automation-practice-form");
         $("#lastName").setValue(lastName);
-        $("#genterWrapper").find(byText(genterWrapper)).click();
+        $("#genterWrapper").find(byText(genderWrapper)).click();
         $("#userNumber").setValue(userNumber);
+        $("#submit").scrollTo().shouldBe(visible);
         $("#submit").click();
 
         $("#userForm").shouldHave(cssClass("was-validated"));
@@ -95,11 +104,13 @@ class PracticeForm {
     }
     @Test
     void negativeInvalidEmail() {
+        open("/automation-practice-form");
         $("#firstName").setValue(firstName);
         $("#lastName").setValue(lastName);
         $("#userEmail").setValue(wrongEmail);
-        $("#genterWrapper").find(byText(genterWrapper)).click();
+        $("#genterWrapper").find(byText(genderWrapper)).click();
         $("#userNumber").setValue(userNumber);
+        $("#submit").scrollTo().shouldBe(visible);
         $("#submit").click();
 
         $("#userForm").shouldHave(cssClass("was-validated"));
@@ -108,10 +119,12 @@ class PracticeForm {
 
     @Test
     void negativeInvalidPhone() {
+        open("/automation-practice-form");
         $("#firstName").setValue(firstName);
         $("#lastName").setValue(lastName);
-        $("#genterWrapper").find(byText(genterWrapper)).click();
+        $("#genterWrapper").find(byText(genderWrapper)).click();
         $("#userNumber").setValue(wrongNumber);
+        $("#submit").scrollTo().shouldBe(visible);
         $("#submit").click();
 
         $("#userForm").shouldHave(cssClass("was-validated"));
@@ -120,8 +133,10 @@ class PracticeForm {
 
     @Test
     void negativeEmptyGender() {
+        open("/automation-practice-form");
         $("#lastName").setValue(lastName);
         $("#userNumber").setValue(userNumber);
+        $("#submit").scrollTo().shouldBe(visible);
         $("#submit").click();
 
         $("#userForm").shouldHave(cssClass("was-validated"));
@@ -130,6 +145,8 @@ class PracticeForm {
 
     @Test
     void negativeEmptyForm() {
+        open("/automation-practice-form");
+        $("#submit").scrollTo().shouldBe(visible);
         $("#submit").click();
 
         $("#userForm").shouldHave(cssClass("was-validated"));

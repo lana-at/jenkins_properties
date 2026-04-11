@@ -4,7 +4,7 @@ public class TestData {
     public static String firstName = "Lana";
     public static String lastName = "Neobutova";
     public static String userEmail = "lanampr1986@gmail.com";
-    public static String genterWrapper = "Female";
+    public static String genderWrapper = "Female";
     public static String userNumber = "9127788492";
     public static String year = "1986";
     public static String month = "June";
