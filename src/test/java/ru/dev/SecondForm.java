@@ -4,9 +4,8 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static ru.dev.TestBase.secondPage;
 import static testdata.TestData.*;
 
 
@@ -27,22 +26,21 @@ class SecondForm {
 
     @Test
     void fillForm() {
-        open("/text-box");
-        $("#userName").setValue(firstName);
-        $("#submit").click();
+        secondPage.openPage()
+                .userName(firstName)
+                .submitForm()
+                .outputResult()
+                .checkResult(firstName);
 
-        $("#output").shouldHave(text(firstName));
     }
 
     @Test
     void successfulFillOnlyMandatoryFieldsTest() {
-        open("/text-box");
-        $("#userName").setValue(firstName);
-        $("#userEmail").setValue(wrongEmail);
-        $("#submit").click();
-
-        $("#userEmail").shouldHave(cssClass("field-error"));
-        $("#output").shouldNotBe(visible);
+        secondPage.openPage()
+                .userName(firstName)
+                .userEmail(wrongEmail)
+                .submitForm()
+                .error();
 
     }
 

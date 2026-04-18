@@ -8,7 +8,7 @@ public class TestData {
     public static String userNumber = "9127788492";
     public static String year = "1986";
     public static String month = "June";
-    public static int day = 20;
+    public static String day = "20";
     public static String subjects = "Arts";
     public static String hobbies = "Sports";
     public static String uploadfile = "1.jpg";
