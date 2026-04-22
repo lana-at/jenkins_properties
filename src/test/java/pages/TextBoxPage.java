@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class TextBoxPage {
     CalendarComponent calendar = new CalendarComponent();
@@ -34,6 +35,11 @@ public class TextBoxPage {
 
     public TextBoxPage openPage() {
         open("/automation-practice-form");
+
+        executeJavaScript("""
+        document.getElementById('fixedban')?.remove();
+        document.querySelector('footer')?.remove();
+        """);
 
         return this;
     }
