@@ -5,11 +5,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Selenide.*;
-import static ru.dev.TestBase.secondPage;
+import static ru.dev.TestBase.textBoxPage;
 import static testdata.TestData.*;
 
 
-class SecondForm {
+class TextBoxPage {
 
 
     @BeforeAll
@@ -26,7 +26,7 @@ class SecondForm {
 
     @Test
     void fillForm() {
-        secondPage.openPage()
+        textBoxPage.openPage()
                 .userName(firstName)
                 .submitForm()
                 .outputResult()
@@ -36,7 +36,7 @@ class SecondForm {
 
     @Test
     void successfulFillOnlyMandatoryFieldsTest() {
-        secondPage.openPage()
+        textBoxPage.openPage()
                 .userName(firstName)
                 .userEmail(wrongEmail)
                 .submitForm()

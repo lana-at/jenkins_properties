@@ -9,7 +9,7 @@ public class PracticeForm extends TestBase{
     @Test
     void successfulLoginTest() {
 
-        textBoxPage.openPage()
+        practiceFormPage.openPage()
                 .typeFirstName(firstName)
                 .typeLastName(lastName)
                 .typeEmail(userEmail)
@@ -40,7 +40,7 @@ public class PracticeForm extends TestBase{
 
     @Test
     void successfulFillOnlyMandatoryFieldsTest() {
-        textBoxPage.openPage()
+        practiceFormPage.openPage()
                 .typeFirstName(firstName)
                 .typeLastName(lastName)
                 .setGender(genderWrapper)
@@ -57,60 +57,60 @@ public class PracticeForm extends TestBase{
 
     @Test
     void negativeEmptyFirstNameTest() {
-        textBoxPage.openPage()
+        practiceFormPage.openPage()
                 .typeLastName(lastName)
                 .setGender(genderWrapper)
                 .typeNumber(userNumber)
                 .submitFormErrors()
-                .ValidationErrors()
-                .ModalNotShown();
+                .validationErrors()
+                .modalNotShown();
 
     }
 
 
     @Test
     void negativeInvalidEmail() {
-        textBoxPage.openPage()
+        practiceFormPage.openPage()
                 .typeFirstName(firstName)
                 .typeLastName(lastName)
                 .typeEmail(wrongEmail)
                 .setGender(genderWrapper)
                 .typeNumber(userNumber)
                 .submitFormErrors()
-                .ValidationErrors()
-                .ModalNotShown();
+                .validationErrors()
+                .modalNotShown();
     }
 
     @Test
     void negativeInvalidPhone() {
-        textBoxPage.openPage()
+        practiceFormPage.openPage()
                 .typeFirstName(firstName)
                 .typeLastName(lastName)
                 .setGender(genderWrapper)
                 .typeNumber(wrongNumber)
                 .submitFormErrors()
-                .ValidationErrors()
-                .ModalNotShown();
+                .validationErrors()
+                .modalNotShown();
 
     }
 
     @Test
     void negativeEmptyGender() {
-        textBoxPage.openPage()
+        practiceFormPage.openPage()
                 .typeLastName(lastName)
                 .typeNumber(userNumber)
                 .submitFormErrors()
-                .ValidationErrors()
-                .ModalNotShown();
+                .validationErrors()
+                .modalNotShown();
 
     }
 
     @Test
     void negativeEmptyForm() {
-        textBoxPage.openPage()
+        practiceFormPage.openPage()
                 .submitFormErrors()
-                .ValidationErrors()
-                .ModalNotShown();
+                .validationErrors()
+                .modalNotShown();
 
     }
 
