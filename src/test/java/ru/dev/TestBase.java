@@ -18,6 +18,7 @@ public class TestBase {
         Configuration.timeout = 10000;
         Configuration.pageLoadStrategy = "normal";
         Configuration.browserPosition = "0x0";
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
     }
 
     @AfterEach
