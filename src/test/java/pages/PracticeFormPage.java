@@ -1,6 +1,7 @@
 package pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import pages.components.CalendarComponent;
 import pages.components.ResultComponent;
 import static com.codeborne.selenide.Condition.*;
@@ -34,6 +35,7 @@ public class PracticeFormPage {
 
     //Actions
 
+    @Step("Open registration page /automation-practice-form")
     public PracticeFormPage openPage() {
         open("/automation-practice-form");
         removeBanner();
@@ -41,68 +43,78 @@ public class PracticeFormPage {
         return this;
     }
 
+    @Step("Type first name \"{value}\"")
     public PracticeFormPage typeFirstName(String value) {
         firstNameInput.setValue(value);
 
         return this;
     }
 
+    @Step("Type last name \"{value}\"")
     public PracticeFormPage typeLastName(String value) {
         lastNameInput.setValue(value);
 
         return this;
     }
 
+    @Step("Type email \"{value}\"")
     public PracticeFormPage typeEmail(String value) {
         emailInput.setValue(value);
 
         return this;
     }
 
+    @Step("Set gender \"{value}\"")
     public PracticeFormPage setGender(String value) {
         genderContainer.$(byText(value)).click();
 
         return this;
     }
 
+    @Step("Type number \"{value}\"")
     public PracticeFormPage typeNumber(String value) {
         numberInput.setValue(value);
 
         return this;
     }
 
+    @Step("Type subjects \"{value}\"")
     public PracticeFormPage typeSubjects(String value) {
         subjectsContainer.setValue(value).pressEnter();
 
         return this;
     }
 
+    @Step("Set hobbies \"{value}\"")
     public PracticeFormPage setHobbies(String value) {
         hobbiesConteiner.$(byText(value)).click();
 
         return this;
     }
 
+    @Step("Type picture \"{fileName}\"")
     public PracticeFormPage typePicture(String fileName) {
         pictureInput.uploadFromClasspath(fileName);
 
         return this;
     }
 
+    @Step("Type address \"{value}\"")
     public PracticeFormPage typeAddress(String value) {
         addressInput.setValue(value);
 
         return this;
     }
 
+    @Step("Set date of birth \"{day}.{month}.{year}\"")
     public PracticeFormPage setDateOfBirth(String day, String month, String year) {
         $("#dateOfBirthInput").click();
         calendar.setDate(day, month, year);
 
-
         return this;
     }
 
+    @Step("Set state \"{value}\"")
     public PracticeFormPage setState(String value) {
         stateSelect.click();
         stateCityContainer.$(byText(value)).click();
@@ -111,6 +123,7 @@ public class PracticeFormPage {
     }
 
 
+    @Step("Set city \"{value}\"")
     public PracticeFormPage setCity(String value) {
         citySelect.click();
         stateCityContainer.$(byText(value)).click();
@@ -119,20 +132,25 @@ public class PracticeFormPage {
     }
 
 
+    @Step("Submit form")
     public ResultComponent submitForm() {
         submitButton.scrollTo().shouldBe(visible).click();
         return result;
     }
 
+    @Step("Submit form errors")
     public PracticeFormPage submitFormErrors() {
         submitButton.scrollTo().shouldBe(visible).click();
         return this;
     }
+
+    @Step("Validation errors")
     public PracticeFormPage validationErrors() {
         userForm.shouldHave(cssClass("was-validated"));
         return this;
     }
 
+    @Step("Проверяем, что модальное окно не отображается")
     public void modalNotShown() {
         modalTitle.shouldNotBe(visible);
     }
