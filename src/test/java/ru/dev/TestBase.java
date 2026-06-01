@@ -19,20 +19,19 @@ public class TestBase {
     @BeforeAll
     static void beforeAll() {
         Configuration.baseUrl = System.getProperty("baseUrl", "https://demoqa.com");
+        Configuration.remote = System.getProperty("remote");
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("browserVersion", "128.0");
-        Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
         Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
-        Configuration.pageLoadStrategy = System.getProperty("pageLoadStrategy", "normal");
+        Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
+
+        Configuration.pageLoadStrategy = "normal";
         Configuration.timeout = 10000;
         Configuration.browserPosition = "0x0";
-        Configuration.remote = System.getProperty("remote");
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("browserVersion", Configuration.browserVersion);
-        capabilities.setCapability("selenoid:options", Map.of(
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                 "enableVNC", true,
-                "enableVideo", true,
-                "screenResolution", Configuration.browserSize
+                "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
     }
