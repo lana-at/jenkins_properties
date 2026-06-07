@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 import static testdata.TestData.*;
 
 
-public class PracticeForm extends TestBase{
+public class PracticeFormTest extends TestBase{
 
 
     @Test

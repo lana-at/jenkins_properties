@@ -17,7 +17,7 @@ public class TestBase {
     protected static TextBoxPage textBoxPage = new TextBoxPage();
 
     @BeforeAll
-    static void beforeAll() {
+    static void prepareEnvironment() {
         Configuration.baseUrl = System.getProperty("baseUrl", "https://demoqa.com");
         Configuration.remote = System.getProperty("remote");
         Configuration.browser = System.getProperty("browser", "chrome");
