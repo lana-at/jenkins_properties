@@ -1,5 +1,3 @@
-package ru.dev;
-
 import com.codeborne.selenide.Configuration;
 import helpers.Attach;
 import org.junit.jupiter.api.AfterEach;

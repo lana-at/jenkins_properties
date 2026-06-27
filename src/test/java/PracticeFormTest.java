@@ -1,4 +1,3 @@
-package ru.dev;
 import org.junit.jupiter.api.Test;
 import static testdata.TestData.*;
 
