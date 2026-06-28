@@ -3,7 +3,6 @@ import helpers.Attach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import pages.PracticeFormPage;
 import pages.TextBoxPage;
 
 import java.util.Map;
@@ -11,7 +10,6 @@ import java.util.Map;
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 
 public class TestBase {
-    protected static PracticeFormPage practiceFormPage = new PracticeFormPage();
     protected static TextBoxPage textBoxPage = new TextBoxPage();
 
     @BeforeAll
@@ -20,7 +18,7 @@ public class TestBase {
         Configuration.remote = System.getProperty("remote");
         Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("browserVersion", "128.0");
-        Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
+        Configuration.headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
 
         Configuration.pageLoadStrategy = "normal";

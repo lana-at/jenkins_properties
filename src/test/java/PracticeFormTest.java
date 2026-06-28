@@ -1,8 +1,11 @@
 import org.junit.jupiter.api.Test;
+import pages.PracticeFormPage;
+
 import static testdata.TestData.*;
 
 
 public class PracticeFormTest extends TestBase{
+    protected static PracticeFormPage practiceFormPage = new PracticeFormPage();
 
 
     @Test
